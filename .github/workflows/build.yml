@@ -2,7 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - '*'
 
 jobs:
   maven-central:
@@ -54,6 +55,9 @@ jobs:
         env:
           staging_url: ${{ steps.staging.outputs.staging_url }}
           maven_version: ${{ steps.staging.outputs.maven_version }}
+      - uses: OrbitalOwen/desktop-screenshot-action@0.1
+        with:
+           file-name: 'desktop.jpg'
       - name: Test Maven (Windows)
         if: runner.os == 'windows'
         run: |
